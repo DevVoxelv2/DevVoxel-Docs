@@ -4,7 +4,7 @@ const path = require('path');
 const fs = require('fs').promises;
 const { exec } = require('child_process');
 
-const owner = process.env.GITHUB_OWNER || 'DevVoxel';
+const owner = process.env.GITHUB_OWNER || 'DevVoxelv2';
 const repo = process.env.GITHUB_REPO || 'DevVoxel-Docs';
 const branch = process.env.GITHUB_BRANCH || 'main';
 const port = process.env.PORT || 3000;
@@ -41,8 +41,22 @@ if (!process.argv.includes('--test')) {
   setInterval(updateRepo, updateInterval);
 }
 
-function renderHTML(md, sidebarMd) {
-  return `<!doctype html><html><head><meta charset="utf-8"><title>Docs</title><style>body{margin:0;font-family:sans-serif;}nav{background:#333;color:#fff;padding:10px;}nav a{color:#fff;margin-right:10px;text-decoration:none;}#main{display:flex;}#sidebar{width:200px;padding:10px;background:#f0f0f0;}#content{flex:1;padding:10px;}</style></head><body><nav><a href="/">Home</a><a href="https://github.com/${owner}/${repo}" target="_blank">GitHub</a></nav><div id="main"><div id="sidebar"></div><div id="content"></div></div><script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script><script>const contentMD=${JSON.stringify(md)};const sidebarMD=${JSON.stringify(sidebarMd)};document.getElementById('content').innerHTML=marked.parse(contentMD);document.getElementById('sidebar').innerHTML=marked.parse(sidebarMD);</script></body></html>`;
+async function renderHTML(md, sidebarMd) {
+  try {
+    const templatePath = path.join(__dirname, 'template.html');
+    let template = await fs.readFile(templatePath, 'utf8');
+    
+    // Replace placeholders
+    template = template.replace(/\{\{owner\}\}/g, owner);
+    template = template.replace(/\{\{repo\}\}/g, repo);
+    template = template.replace('{{contentMD}}', JSON.stringify(md));
+    template = template.replace('{{sidebarMD}}', JSON.stringify(sidebarMd));
+    
+    return template;
+  } catch (error) {
+    // Fallback to original template if file doesn't exist
+    return `<!doctype html><html><head><meta charset="utf-8"><title>Docs</title><style>body{margin:0;font-family:sans-serif;}nav{background:#333;color:#fff;padding:10px;}nav a{color:#fff;margin-right:10px;text-decoration:none;}#main{display:flex;}#sidebar{width:200px;padding:10px;background:#f0f0f0;}#content{flex:1;padding:10px;}</style></head><body><nav><a href="/">Home</a><a href="https://github.com/${owner}/${repo}" target="_blank">GitHub</a></nav><div id="main"><div id="sidebar"></div><div id="content"></div></div><script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script><script>const contentMD=${JSON.stringify(md)};const sidebarMD=${JSON.stringify(sidebarMd)};document.getElementById('content').innerHTML=marked.parse(contentMD);document.getElementById('sidebar').innerHTML=marked.parse(sidebarMD);</script></body></html>`;
+  }
 }
 
 if (process.argv.includes('--test')) {
@@ -64,7 +78,7 @@ const server = http.createServer(async (req, res) => {
         fetchMarkdown(pathname),
         fetchMarkdown('/sidebar')
       ]);
-      const html = renderHTML(md, sidebarMd);
+      const html = await renderHTML(md, sidebarMd);
       res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
       res.end(html);
     } catch (err) {
