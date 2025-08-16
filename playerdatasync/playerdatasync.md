@@ -2,30 +2,6 @@
 
 Welcome! This wiki is your complete guide to installing, configuring, and troubleshooting **PlayerDataSync** — the cross‑server data synchronization plugin for Spigot/Paper networks.
 
-> **Last updated:** 2025‑08‑16
-
-***
-
-## 📌 Table of Contents
-
-1. [Overview](#overview)
-2. [Features](#features)
-3. [Requirements](#requirements)
-4. [Installation](#installation)
-5. [Configuration](#configuration)
-   * [Core settings](#core-settings)
-   * [Data types to sync](#data-types-to-sync)
-   * [Messages & localization](#messages--localization)
-6. [Database Setup](#database-setup)
-7. [How It Works](#how-it-works)
-8. [Best Practices](#best-practices)
-9. [Troubleshooting](#troubleshooting)
-10. [FAQ](#faq)
-11. [Compatibility](#compatibility)
-12. [Downloads & Support](#downloads--support)
-
-***
-
 ## Overview
 
 **PlayerDataSync** keeps all essential player data consistent across multiple Spigot/Paper servers by syncing to a shared database. Ideal for **BungeeCord** and **Velocity** networks.

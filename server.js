@@ -75,12 +75,10 @@ const server = http.createServer(async (req, res) => {
     try {
       const pathname = url.parse(req.url).pathname;
       
-      // Serve service worker
+      // Service worker disabled - return 404 for sw.js requests
       if (pathname === '/sw.js') {
-        const swPath = path.join(__dirname, 'sw.js');
-        const swContent = await fs.readFile(swPath, 'utf8');
-        res.writeHead(200, { 'Content-Type': 'application/javascript' });
-        res.end(swContent);
+        res.writeHead(404, { 'Content-Type': 'text/plain' });
+        res.end('Service Worker disabled');
         return;
       }
       

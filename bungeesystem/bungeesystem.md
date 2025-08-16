@@ -2,27 +2,6 @@
 
 Welcome to the official wiki for **BungeeSystem** — a powerful proxy addon for **BungeeCord** and **Velocity**, designed to enhance your network with essential commands, MySQL support, chat features, and more.
 
-> **Last updated:** 2025‑08‑16
-
----
-
-## 📌 Table of Contents
-
-1. [Overview](#overview)
-2. [Features](#features)
-3. [Requirements](#requirements)
-4. [Installation](#installation)
-5. [Configuration](#configuration)
-6. [Commands & Permissions](#commands--permissions)
-7. [Changelog](#changelog)
-8. [Best Practices](#best-practices)
-9. [Troubleshooting](#troubleshooting)
-10. [FAQ](#faq)
-11. [Compatibility](#compatibility)
-12. [Downloads & Support](#downloads--support)
-
----
-
 ## Overview
 
 **BungeeSystem** is a modular proxy plugin that extends BungeeCord and Velocity with network‑wide commands, private messaging, moderation, MySQL statistics, and webhook support. Lightweight, highly configurable, and production‑ready.
