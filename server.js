@@ -1,19 +1,44 @@
 const http = require('http');
 const url = require('url');
+const path = require('path');
+const fs = require('fs').promises;
+const { exec } = require('child_process');
 
 const owner = process.env.GITHUB_OWNER || 'DevVoxel';
 const repo = process.env.GITHUB_REPO || 'DevVoxel-Docs';
 const branch = process.env.GITHUB_BRANCH || 'main';
 const port = process.env.PORT || 3000;
+const updateInterval = Number(process.env.UPDATE_INTERVAL_MS) || 5 * 60 * 1000;
 
 async function fetchMarkdown(pathname) {
-  const filePath = pathname === '/' ? 'README.md' : `${pathname.slice(1)}.md`;
-  const rawUrl = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${filePath}`;
-  const resp = await fetch(rawUrl);
-  if (!resp.ok) {
-    throw new Error(`Request failed: ${resp.status}`);
+  const clean = pathname.replace(/^\/|\/$/g, '') || 'README';
+  const candidates = [
+    `${clean}.md`,
+    path.join(clean, `${path.basename(clean)}.md`)
+  ];
+
+  for (const file of candidates) {
+    try {
+      const fullPath = path.join(__dirname, file);
+      return await fs.readFile(fullPath, 'utf8');
+    } catch {}
   }
-  return await resp.text();
+  throw new Error('File not found');
+}
+
+function updateRepo() {
+  exec('git pull', { cwd: __dirname }, (err, stdout, stderr) => {
+    if (err) {
+      console.error(`Auto-update failed: ${stderr || err.message}`);
+    } else if (stdout.trim()) {
+      console.log(`Repository updated:\n${stdout.trim()}`);
+    }
+  });
+}
+
+if (!process.argv.includes('--test')) {
+  updateRepo();
+  setInterval(updateRepo, updateInterval);
 }
 
 function renderHTML(md, sidebarMd) {
