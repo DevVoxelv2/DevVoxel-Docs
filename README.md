@@ -38,15 +38,3 @@
 ---
 
 ✨ *DevVoxel – powering the future of Minecraft servers.*
-
----
-
-## 📚 Local Docs Server
-
-This repository contains a lightweight Node.js server that renders the Markdown files in this project. The server reads the files from disk and periodically runs `git pull` in the background to fetch updates from GitHub.
-
-```bash
-npm start
-```
-
-By default the repository is checked for updates every five minutes. Set `UPDATE_INTERVAL_MS` to override the interval (milliseconds).
