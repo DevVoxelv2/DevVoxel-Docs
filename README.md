@@ -1,25 +1,40 @@
-# DevVoxel Docs
+# 🚀 Welcome to DevVoxel
 
-Dieses Projekt stellt einen kleinen Node.js-Server bereit, der Markdown-Dateien direkt aus einem GitHub-Repository lädt und sie als HTML rendert. Die Startseite `/` zeigt automatisch die Datei `README.md`, sodass das Wiki stets den aktuellen Stand des Repos widerspiegelt.
+**DevVoxel** is a development platform focused on building high‑quality plugins, tools, and documentation for **Minecraft server networks**. Our mission is to deliver **seamless integrations**, **powerful features**, and **user‑friendly solutions** that help administrators and developers succeed.
 
-Eine Seitenleiste (`sidebar.md`) hält Verweise auf weitere Dokumentationsseiten bereit. Eigene Seiten können als Markdown-Dateien angelegt und in der Sidebar verlinkt werden.
+---
 
-## Nutzung
+## 🌟 What We Offer
 
-1. Node.js (Version 18 oder höher) installieren.
-2. Optional die Ziel‑Repository über Umgebungsvariablen festlegen:
-   - `GITHUB_OWNER` – Besitzer des Repos (Standard: `DevVoxel`)
-   - `GITHUB_REPO` – Name des Repos (Standard: `DevVoxel-Docs`)
-   - `GITHUB_BRANCH` – Branch, aus dem geladen wird (Standard: `main`)
-3. Server starten:
+* ✅ **Minecraft Plugins & Tools** – Reliable, optimized, and production‑ready
+* ✅ **Comprehensive Documentation** – Clear, step‑by‑step setup guides
+* ✅ **Developer API** – Extensible and flexible for custom integrations
+* ✅ **Community Support** – Active Discord and forum for real‑time help
 
-   ```
-   npm start
-   ```
-4. Im Browser `http://localhost:3000/` aufrufen, um die `README.md` zu sehen. Weitere Pfade wie `/foo` laden `foo.md` aus dem festgelegten Repo.
+---
 
-   Die Navigationsleiste oben enthält Links zur Startseite und zum GitHub-Repository.
+## 📌 Featured Projects
 
-## Entwicklung
+🔹 [**PlayerDataSync**](https://www.spigotmc.org/resources/playerdatasync-1-20-4-1-21-7-cross-server-data-synchronization.123166/) – Synchronize inventories, stats, and more across multiple servers
 
-Zurzeit existieren keine automatischen Tests; `npm test` gibt lediglich einen Hinweis aus.
+🔹 [**BungeeSystem**](https://www.spigotmc.org/resources/bungeesystem-powerful-proxy-addon-%E2%9A%A1-mysql-chat-commands.119339/) – Powerful proxy addon for BungeeCord & Velocity with MySQL, stats, and chat commands
+
+---
+
+## 🛠 Who is DevVoxel For?
+
+* **Minecraft Server Owners** – Boost performance and add modern features
+* **Plugin Developers** – Build and extend using our robust API
+* **Community Managers** – Simplify server management with automation
+
+---
+
+## 📞 Get Involved
+
+* 💬 **Join our Discord** → Real‑time support and developer discussions
+* 📢 **Follow us on SpigotMC** → Stay updated with the latest plugins and releases
+* ⭐ **Contribute on GitHub** → Open source projects and community contributions
+
+---
+
+✨ *DevVoxel – powering the future of Minecraft servers.*
